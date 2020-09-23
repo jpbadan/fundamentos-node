@@ -20,7 +20,7 @@ class TransactionsRepository {
   }
 
   public all(): Transaction[] {
-    // TODO
+    return this.transactions;
   }
 
   public getBalance(): Balance {
@@ -29,6 +29,11 @@ class TransactionsRepository {
 
   public create({ title, value, type }: TransactionDTO): Transaction {
     const transaction = new Transaction({ title, value, type });
+
+    // data validation
+    if (type !== 'income' && type !== 'outcome') {
+      throw Error('Wrong type. type must be <income> or <outcome>');
+    }
 
     this.transactions.push(transaction);
 
