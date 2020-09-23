@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import Transaction from '../models/Transaction';
+// import Transaction from '../models/Transaction';
 
 import TransactionsRepository from '../repositories/TransactionsRepository';
 import CreateTransactionService from '../services/CreateTransactionService';
@@ -33,6 +33,10 @@ transactionRouter.post('/', (request, response) => {
   } catch (err) {
     return response.status(400).json({ error: err.message });
   }
+});
+
+transactionRouter.get('/balance', (request, response) => {
+  return response.json(transactionsRepository.getBalance());
 });
 
 export default transactionRouter;
